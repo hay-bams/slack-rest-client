@@ -3,9 +3,8 @@ import axios from "axios";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import { Signin } from "components/Signin";
 import { Home } from "components/Home";
-import { CreateAccount } from "components/create-account";
+import { Register } from "components/Register";
 import { AppContext } from "components/AppProvider";
 
 axios.defaults.baseURL = "http://localhost:3010";
@@ -30,8 +29,7 @@ const Routes = () => {
       <div>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/signin" component={Signin} />
-          <Route exact path="/create-account" component={CreateAccount} />
+          <Route exact path="/register" component={Register} />
           <Route component={Notfound} />
         </Switch>
       </div>
