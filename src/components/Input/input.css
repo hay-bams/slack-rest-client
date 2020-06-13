@@ -1,0 +1,15 @@
+.inputContainer {
+    margin-bottom: 30px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input {
+    width: 350px;
+    height: 20px;
+    color: #fff;
+    padding: 10px;
+}
