@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import { Home } from "components/Home";
 import { Register } from "components/Register";
+import { Login } from "components/Login";
 import { AppContext } from "components/AppProvider";
 
 axios.defaults.baseURL = "http://localhost:3010";
@@ -30,6 +31,7 @@ const Routes = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
           <Route component={Notfound} />
         </Switch>
       </div>
