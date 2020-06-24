@@ -6,14 +6,17 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Home } from "components/Home";
 import { Register } from "components/Register";
 import { Login } from "components/Login";
+import { CreateTeam } from "components/CreateTeam";
 import { AppContext } from "components/AppProvider";
 
 axios.defaults.baseURL = "http://localhost:3010";
 
-const auth = window.localStorage.getItem("auth");
-if (auth) {
-  axios.defaults.headers.common["Authorization"] = auth.token;
-}
+const token = window.localStorage.getItem("token");
+const refreshToken = window.localStorage.getItem("refreshToken");
+if (token && refreshToken) {
+  axios.defaults.headers.common["x-token"] = token;
+  axios.defaults.headers.common["x-refresh-token"] = refreshToken;
+} 
 
 const Notfound = () => <h1>Not found</h1>;
 
@@ -22,9 +25,10 @@ const Routes = () => {
   useEffect(() => {
     setState({
       ...state,
-      auth: JSON.parse(auth),
+      token,
+      refreshToken
     });
-  }, [auth]);
+  }, [token, refreshToken]);
   return (
     <Router>
       <div>
@@ -32,6 +36,7 @@ const Routes = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/create-team" component={CreateTeam} />
           <Route component={Notfound} />
         </Switch>
       </div>
