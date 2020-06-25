@@ -13,19 +13,17 @@ export const CreateTeam = ({ history }) => {
     axios
       .post("/teams", form)
       .then((response) => {
-        console.log(response.data, '++++++++++++++')
         history.push("/");
       })
       .catch((err) => {
         const errors = {};
-        console.log()
+        console.log('}}}}}}}}}}???')
         err.response.data.errors.forEach(({ path, message }) => {
           errors[path] = message;
         });
         setErrors(errors);
         return false;
       });
-    console.log(form);
   };
 
   const errorList = [];
