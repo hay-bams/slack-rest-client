@@ -5,9 +5,8 @@ import decode from 'jwt-decode'
 import { Channels } from "components/Channels";
 import { Teams } from "components/Teams";
 
-const currentTeamId = 33
 
-export const Sidebar = () => {
+export const Sidebar = ({ currentTeamId }) => {
     const [loading, setLoading] = useState(true)
     const[allTeams, setAllTeams] = useState([])
     const[channels, setChannels] = useState([])
@@ -17,17 +16,19 @@ export const Sidebar = () => {
         axios.get('/teams').then((response) => {
             const teams = response.data
             setAllTeams(teams)
-            const teamIdx =  _.findIndex(teams, ['id', currentTeamId])
+            const teamIdx = currentTeamId ?  _.findIndex(teams, ['id', parseInt(currentTeamId, 10)]) : 0;
             setTeam( teams[teamIdx])
         }) .catch(() => {})
-    }, [])
+    }, [currentTeamId])
 
     useEffect(() => {
         console.log('response.data')
-        axios.get(`/channels/${team.id}`).then((response) => {
-            setChannels(response.data)
-            setLoading(false)
-        }).catch((e) => {}) 
+        if(team.id) {
+            axios.get(`/channels/${team.id}`).then((response) => {
+                setChannels(response.data)
+                setLoading(false)
+            }).catch((e) => {}) 
+        }
     }, [team])
 
     let username = ''
@@ -38,7 +39,6 @@ export const Sidebar = () => {
         const token = localStorage.getItem('token')
         const { user } = decode(token)
         username = user.username
-        console.log(token, '++++')
     } catch (err) {}
 
     return (

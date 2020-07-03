@@ -6,10 +6,10 @@ import Messages from "components/Messages";
 import { Sidebar } from "components/Sidebar";
 import AppLayout from "components/AppLayout";
 
-export const ViewTeam = () => {
+export const ViewTeam = ({ match: { params } }) => {
   return (
     <AppLayout>
-        <Sidebar />
+        <Sidebar currentTeamId={params.teamId}/>
       <Header channelName="general" />
       <Messages>
         <ul className="message-list">

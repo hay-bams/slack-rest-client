@@ -57,6 +57,7 @@ const Routes = () => {
       refreshToken
     });
   }, [token, refreshToken]);
+  // ? means optional parameter
   return (
     <Router>
       <div>
@@ -64,7 +65,7 @@ const Routes = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/view-team" component={ViewTeam} />
+          <Route exact path="/view-team/:teamId?/:channelId?" component={ViewTeam} />
           <PrivateRoute exact path="/create-team" component={CreateTeam} />
           <Route component={Notfound} />
         </Switch>

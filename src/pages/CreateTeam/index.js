@@ -13,11 +13,10 @@ export const CreateTeam = ({ history }) => {
     axios
       .post("/teams", form)
       .then((response) => {
-        history.push("/");
+        history.push(`/view-team/${response.data.team.id}`);
       })
       .catch((err) => {
         const errors = {};
-        console.log('}}}}}}}}}}???')
         err.response.data.errors.forEach(({ path, message }) => {
           errors[path] = message;
         });
